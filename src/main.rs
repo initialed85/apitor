@@ -157,9 +157,9 @@ async fn main() -> anyhow::Result<()> {
     let safe_left_speed_clone = safe_left_speed.clone();
     let safe_right_speed_clone = safe_right_speed.clone();
 
-    relevant_peripheral
-        .subscribe(&notify_characteristic)
-        .await?;
+    // relevant_peripheral
+    //     .subscribe(&notify_characteristic)
+    //     .await?;
 
     tokio::spawn(async move {
         loop {
@@ -171,14 +171,19 @@ async fn main() -> anyhow::Result<()> {
             let mut left_speed = *safe_left_speed_clone.lock().await;
             let mut right_speed = *safe_right_speed_clone.lock().await;
 
-            let mut notification_stream =
-                relevant_peripheral.notifications().await.unwrap().take(1);
+            // let mut notification_stream =
+            //     relevant_peripheral.notifications().await.unwrap().take(1);
 
-            let notification = notification_stream.next().await;
+            // let notification = notification_stream.next().await;
+
+            // println!(
+            //     "left_speed:\t{:?}\tright_speed:\t{:?}\t{:?}",
+            //     left_speed, right_speed, notification
+            // );
 
             println!(
-                "left_speed:\t{:?}\tright_speed:\t{:?}\t{:?}",
-                left_speed, right_speed, notification
+                "left_speed:\t{:?}\tright_speed:\t{:?}",
+                left_speed, right_speed
             );
 
             //
